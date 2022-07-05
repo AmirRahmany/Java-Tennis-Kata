@@ -8,8 +8,8 @@ public class Scoreboard {
         return String.format("%s-%s", player1Points, player2Points);
     }
 
-    String advantagePointFor(String player) {
-        return String.format("Advantage point for %s", player);
+    String advantagePointFor(String playerName) {
+        return String.format("Advantage point for %s", playerName);
     }
 
     public String deucePoint(String player1Points, String player2Points) {

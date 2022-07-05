@@ -1,5 +1,4 @@
 public class TennisGameStatus {
-    private static final String DEUCE_SCORE = "deuce";
     private final Player player1;
     private final Player player2;
     private final Scoreboard scoreboard;
@@ -14,11 +13,9 @@ public class TennisGameStatus {
         String gameStatus = defaultGameStatus();
 
         if (player1.didWinOver(player2))
-            gameStatus = scoreboard.matchResult(player1.getName(),
-                    player1.getTennisStylePoints(), player2.getTennisStylePoints());
+            gameStatus = matchResultFormatForPlayer1();
         else if (player2.didWinOver(player1))
-            gameStatus = scoreboard.matchResult(player2.getName(),
-                            player2.getTennisStylePoints(), player1.getTennisStylePoints());
+            gameStatus = matchResultFormatForPlayer2();
         else if (player1.isAdvantagePoint(player2))
             gameStatus = scoreboard.advantagePointFor(player1.getName());
         else if (player2.isAdvantagePoint(player1))
@@ -27,6 +24,19 @@ public class TennisGameStatus {
             gameStatus = scoreboard.deucePoint(player1.getTennisStylePoints(), player2.getTennisStylePoints());
 
         return gameStatus;
+    }
+
+    private String matchResultFormatForPlayer2() {
+        return matchResultFormat(player2, player1);
+    }
+
+    private String matchResultFormatForPlayer1() {
+        return matchResultFormat(player1, player2);
+    }
+
+    private String matchResultFormat(Player wonPlayer, Player opponent) {
+        return scoreboard.matchResult(wonPlayer.getName(),
+                wonPlayer.getTennisStylePoints(), opponent.getTennisStylePoints());
     }
 
     private String defaultGameStatus() {

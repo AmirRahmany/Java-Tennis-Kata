@@ -69,6 +69,9 @@ public class TennisGameShould {
 
     @Test
     void get_score_format() {
+        tennis.score(Score.GAME, Score.THIRTY);
+        assertThat(tennis.getScore()).isEqualTo("player1 scored a 40-30 victory");
+
         tennis.score(Score.FIFTY, Score.GAME);
         assertThat(tennis.getScore()).isEqualTo("player2 scored a 40-15 victory");
 
@@ -77,5 +80,8 @@ public class TennisGameShould {
 
         tennis.score(Score.GAME, Score.FORTY);
         assertThat(tennis.getScore()).isEqualTo("Advantage point for player1");
+
+        tennis.score(Score.FORTY, Score.GAME);
+        assertThat(tennis.getScore()).isEqualTo("Advantage point for player2");
     }
 }
